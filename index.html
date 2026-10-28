@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WARZONE: LAST STAND</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="loading-screen">
+        <h1>WARZONE</h1>
+        <p>LAST STAND</p>
+        <div class="loader"></div>
+        <span>جاري تجهيز ساحة المعركة...</span>
+    </div>
+
+    <div id="game-ui">
+        <header class="top-bar">
+            <div class="brand">
+                <span class="status-dot"></span>
+                WARZONE <small>LAST STAND</small>
+            </div>
+            <div class="mission">المهمة: السيطرة على المنطقة</div>
+        </header>
+
+        <div class="mission-info">
+            <span>● العملية جارية</span>
+            <h2>OPERATION: DARK STORM</h2>
+            <p>تخلص من الأهداف المعادية وابقَ على قيد الحياة.</p>
+        </div>
+
+        <div class="crosshair" id="crosshair">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div id="hit-marker">×</div>
+
+        <div class="bottom-hud">
+            <div class="stat-card">
+                <span>الصحة</span>
+                <strong id="health">100</strong>
+                <div class="bar">
+                    <div id="health-bar"></div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <span>الدرع</span>
+                <strong id="armor">100</strong>
+                <div class="bar armor-bar">
+                    <div id="armor-bar"></div>
+                </div>
+            </div>
+
+            <div class="weapon-card">
+                <div>
+                    <span>ASSAULT RIFLE</span>
+                    <strong id="ammo">30 <small>/ 120</small></strong>
+                </div>
+                <div class="weapon-icon">⌁</div>
+            </div>
+        </div>
+
+        <div class="kill-counter">
+            ELIMINATIONS <strong id="kills">00</strong>
+        </div>
+
+        <div id="damage-overlay"></div>
+
+        <div id="start-screen">
+            <div class="start-panel">
+                <span class="eyebrow">TACTICAL COMBAT SIMULATOR</span>
+                <h1>WARZONE<br><span>LAST STAND</span></h1>
+                <p>ساحة المعركة تنتظرك. هل تستطيع النجاة؟</p>
+
+                <div class="controls">
+                    <span><b>W A S D</b> الحركة</span>
+                    <span><b>MOUSE</b> التصويب</span>
+                    <span><b>CLICK</b> إطلاق النار</span>
+                    <span><b>R</b> إعادة التلقيم</span>
+                    <span><b>ESC</b> إيقاف مؤقت</span>
+                </div>
+
+                <button id="start-button">ابدأ المهمة ←</button>
+                <p class="disclaimer">نسخة تجريبية — تحتاج إلى اتصال بالإنترنت لتحميل المكتبة.</p>
+            </div>
+        </div>
+
+        <div id="pause-screen" class="hidden">
+            <div class="start-panel">
+                <h1>MISSION PAUSED</h1>
+                <p>المهمة متوقفة مؤقتًا</p>
+                <button id="resume-button">متابعة المهمة</button>
+            </div>
+        </div>
+
+        <div id="game-over" class="hidden">
+            <div class="start-panel">
+                <h1 id="result-title">MISSION FAILED</h1>
+                <p id="result-text">انتهت المهمة.</p>
+                <button id="restart-button">إعادة المحاولة</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="game.js"></script>
+</body>
+</html>
+```

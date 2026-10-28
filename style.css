@@ -1,0 +1,436 @@
+```css
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Cairo:wght@400;700;900&display=swap');
+
+:root {
+    --green: #b8ff45;
+    --dark: #101411;
+    --panel: rgba(10, 16, 12, 0.86);
+    --red: #ff4141;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: #101510;
+    color: white;
+    font-family: 'Cairo', sans-serif;
+}
+
+canvas {
+    position: fixed;
+    inset: 0;
+    display: block;
+    z-index: 0;
+}
+
+#game-ui {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+#loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #090d0a;
+    transition: opacity 0.5s;
+}
+
+#loading-screen h1 {
+    font: 800 60px 'Orbitron', sans-serif;
+    color: var(--green);
+    letter-spacing: 8px;
+}
+
+#loading-screen p {
+    font: 20px 'Orbitron', sans-serif;
+    letter-spacing: 8px;
+    margin: 10px 0 35px;
+}
+
+#loading-screen span {
+    margin-top: 20px;
+    color: #a6b3a6;
+}
+
+.loader {
+    width: 150px;
+    height: 3px;
+    background: #283027;
+    overflow: hidden;
+}
+
+.loader::after {
+    content: "";
+    display: block;
+    height: 100%;
+    width: 45%;
+    background: var(--green);
+    animation: load 1s infinite alternate;
+}
+
+@keyframes load {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(230%); }
+}
+
+.top-bar {
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 35px;
+    background: linear-gradient(#080b09dd, transparent);
+}
+
+.brand {
+    font: 800 18px 'Orbitron', sans-serif;
+    letter-spacing: 2px;
+}
+
+.brand small {
+    display: block;
+    font-size: 9px;
+    color: var(--green);
+    margin-top: 4px;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 12px var(--green);
+    margin-right: 8px;
+}
+
+.mission {
+    color: #c8d0c8;
+    font-size: 12px;
+}
+
+.mission-info {
+    position: absolute;
+    top: 115px;
+    right: 35px;
+    text-align: right;
+    border-right: 3px solid var(--green);
+    padding: 8px 14px;
+    background: linear-gradient(90deg, transparent, #0a100bbd);
+}
+
+.mission-info span {
+    color: var(--green);
+    font-size: 11px;
+}
+
+.mission-info h2 {
+    font: 700 17px 'Orbitron', sans-serif;
+    margin: 8px 0;
+}
+
+.mission-info p {
+    color: #bdc4bd;
+    font-size: 11px;
+}
+
+.crosshair {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 22px;
+    height: 22px;
+    transform: translate(-50%, -50%);
+    transition: transform 0.08s;
+}
+
+.crosshair span {
+    position: absolute;
+    background: #e7f4e6;
+    box-shadow: 0 0 4px #000;
+}
+
+.crosshair span:nth-child(1) {
+    width: 2px;
+    height: 6px;
+    left: 10px;
+    top: 0;
+}
+
+.crosshair span:nth-child(2) {
+    width: 2px;
+    height: 6px;
+    left: 10px;
+    bottom: 0;
+}
+
+.crosshair span:nth-child(3) {
+    width: 6px;
+    height: 2px;
+    left: 0;
+    top: 10px;
+}
+
+.crosshair span:nth-child(4) {
+    width: 6px;
+    height: 2px;
+    right: 0;
+    top: 10px;
+}
+
+#hit-marker {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font: 30px Arial;
+    opacity: 0;
+    color: white;
+}
+
+.bottom-hud {
+    position: absolute;
+    bottom: 30px;
+    left: 35px;
+    display: flex;
+    gap: 12px;
+    align-items: end;
+}
+
+.stat-card,
+.weapon-card {
+    background: var(--panel);
+    border: 1px solid #4b5b46;
+    padding: 13px 16px;
+    min-width: 135px;
+    backdrop-filter: blur(8px);
+}
+
+.stat-card span,
+.weapon-card span {
+    display: block;
+    font-size: 10px;
+    color: #a9b7a7;
+}
+
+.stat-card strong {
+    display: block;
+    font: 600 21px 'Orbitron', sans-serif;
+    margin: 5px 0;
+}
+
+.bar {
+    height: 4px;
+    background: #354034;
+    width: 100%;
+}
+
+#health-bar,
+#armor-bar {
+    width: 100%;
+    height: 100%;
+    background: var(--green);
+    transition: width 0.2s;
+}
+
+#health-bar {
+    background: #69ef6b;
+}
+
+.armor-bar div {
+    background: #50baff !important;
+}
+
+.weapon-card {
+    min-width: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.weapon-card strong {
+    display: block;
+    font: 600 23px 'Orbitron', sans-serif;
+    margin-top: 5px;
+}
+
+.weapon-card strong small {
+    font-size: 12px;
+    color: #8c998b;
+}
+
+.weapon-icon {
+    color: var(--green);
+    font-size: 40px;
+}
+
+.kill-counter {
+    position: absolute;
+    left: 35px;
+    top: 105px;
+    background: var(--panel);
+    border-left: 2px solid var(--green);
+    padding: 12px 16px;
+    font: 10px 'Orbitron', sans-serif;
+}
+
+.kill-counter strong {
+    color: var(--green);
+    font-size: 19px;
+    margin-left: 12px;
+}
+
+#damage-overlay {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background: radial-gradient(transparent 45%, #f00a 100%);
+    transition: opacity 0.15s;
+}
+
+#start-screen,
+#pause-screen,
+#game-over {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #050806bf;
+    backdrop-filter: blur(5px);
+    pointer-events: auto;
+}
+
+.start-panel {
+    width: min(540px, 92vw);
+    padding: 38px;
+    background: linear-gradient(145deg, #151d17f5, #090d0af5);
+    border: 1px solid #53694b;
+    border-top: 3px solid var(--green);
+    box-shadow: 0 20px 100px #000a;
+    text-align: center;
+}
+
+.eyebrow {
+    font: 10px 'Orbitron', sans-serif;
+    letter-spacing: 2px;
+    color: var(--green);
+}
+
+.start-panel h1 {
+    font: 800 clamp(36px, 7vw, 60px) 'Orbitron', sans-serif;
+    line-height: 1.15;
+    margin: 20px 0;
+}
+
+.start-panel h1 span {
+    color: var(--green);
+}
+
+.start-panel p {
+    color: #bac3ba;
+    font-size: 13px;
+    margin-bottom: 22px;
+}
+
+.controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 25px 0;
+    text-align: right;
+}
+
+.controls span {
+    padding: 10px;
+    font-size: 11px;
+    color: #c5cec4;
+    background: #ffffff08;
+    border: 1px solid #ffffff10;
+}
+
+.controls b {
+    display: block;
+    color: var(--green);
+    font: 10px 'Orbitron', sans-serif;
+    margin-bottom: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 16px;
+    background: var(--green);
+    border: none;
+    color: #111710;
+    font: 900 16px 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: white;
+    transform: translateY(-2px);
+}
+
+.disclaimer {
+    margin: 20px 0 0 !important;
+    font-size: 10px !important;
+}
+
+.hidden {
+    display: none !important;
+}
+
+@media (max-width: 650px) {
+    .top-bar {
+        padding: 0 12px;
+    }
+
+    .mission-info {
+        right: 12px;
+        top: 95px;
+    }
+
+    .bottom-hud {
+        left: 10px;
+        bottom: 12px;
+        gap: 5px;
+        transform: scale(0.85);
+        transform-origin: bottom left;
+    }
+
+    .stat-card {
+        min-width: 90px;
+        padding: 10px;
+    }
+
+    .weapon-card {
+        min-width: 130px;
+        padding: 10px;
+    }
+
+    .kill-counter {
+        left: 12px;
+        top: 90px;
+    }
+
+    .start-panel {
+        padding: 24px;
+    }
+}
+```
